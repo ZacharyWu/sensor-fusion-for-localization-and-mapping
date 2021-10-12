@@ -45,7 +45,11 @@ roslaunch imu_integration imu_integration.launch
 
 请搜索TODO, 开始你的编码 :P
 
-#### answer: 
+### answer: 这里主要是对整个惯性导航解算流程的理解,就是对下面四个方法的调用,对应好相应格式,分别 get 和 update 角速度/R 的变化,get 和 update 线速度/t 的变化
+in imu_integration/src/estimatior/activity.cpp
+<img src="doc/images/Q1_code_updated.png" alt="Q1_code_updated" width="100%">
+
+
 
 ### 良好要求: 根据课程给定的数据, 完成基于中值法, 欧拉法的解算, 并对精度做对比分析
 
