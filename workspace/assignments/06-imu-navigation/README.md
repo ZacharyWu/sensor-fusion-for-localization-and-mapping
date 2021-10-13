@@ -82,6 +82,14 @@ roslaunch imu_integration imu_integration.launch
 
 ### Comparsion: 基于欧拉法的解算, 基于中值法的解算, 精度对比分析
 
+#### 中值法: 
+
+<img src="doc/images/mid_output_graph_curve_2.png" alt="mid_output_graph_curve_2" width="100%">
+
+#### 欧拉法: 
+
+<img src="doc/images/Euler_output_graph_curve_2.png" alt="Euler_output_graph_curve_2" width="100%">
+
 
 ### 优秀要求: 利用IMU仿真程序,自己生成不同运动状况(静止、匀速、加减速、快速转弯等)的仿真数据,对比两种解算方法精度差异与运动状况的关系,并给出原因分析
 
