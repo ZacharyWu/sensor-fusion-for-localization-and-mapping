@@ -45,9 +45,10 @@ roslaunch imu_integration imu_integration.launch
 
 请搜索TODO, 开始你的编码 :P
 
-### Answer: 这里主要是对整个惯性导航解算流程的理解,就是对下面四个方法的调用,对应好相应格式,分别 get 和 update 角速度/R 的变化,get 和 update 线速度/t 的变化
 
-#### in imu_integration/src/estimatior/activity.cpp
+### Answer: 这里主要是对整个惯性导航解算流程的理解,就是对下面四个方法的调用,对应好相应格式,分别 get 和 update 角速度/R 的变化,get 和 update 线速度/t 的变化.
+
+#### in imu_integration/src/estimatior/activity.cpp [here](src/imu_integration/src/estimator/activity.cpp)
 
 <img src="doc/images/Q1_code_updated.png" alt="Q1_code_updated" width="100%">
 
@@ -57,12 +58,30 @@ roslaunch imu_integration imu_integration.launch
 
 #### Result curve: 
 
-<img src="doc/images/output_graph_curve_1.png" alt="output_graph_curve_1" width="100%">
+<img src="doc/images/mid_output_graph_curve_1.png" alt="mid_output_graph_curve_1" width="100%">
 
 
 ### 良好要求: 根据课程给定的数据, 完成基于中值法, 欧拉法的解算, 并对精度做对比分析
 
 相比及格要求, 变化不大, 改算法就行, Good Luck!
+
+### Answer: 基于欧拉法的解算, 这里更新的角度和速度变化量的计算公式.
+
+#### in imu_integration/src/estimator/activity.cpp [here](src/imu_integration/src/estimator/activity.cpp)
+
+<img src="doc/images/Q2_code_updated.png" alt="Q2_code_updated" width="100%">
+
+#### Terminal output: 
+
+<img src="doc/images/shell_running2.png" alt="shell_running2" width="100%">
+
+#### Result curve: 
+
+<img src="doc/images/Euler_output_graph_curve_1.png" alt="Euler_output_graph_curve_1" width="100%">
+
+
+### Comparsion: 基于欧拉法的解算, 基于中值法的解算, 精度对比分析
+
 
 ### 优秀要求: 利用IMU仿真程序,自己生成不同运动状况(静止、匀速、加减速、快速转弯等)的仿真数据,对比两种解算方法精度差异与运动状况的关系,并给出原因分析
 
