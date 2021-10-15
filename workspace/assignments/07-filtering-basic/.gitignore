@@ -5,3 +5,5 @@ install
 logs
 .catkin_workspace
 .vscode/
+doc/.DS_Store
+
