@@ -497,14 +497,29 @@ void ErrorStateKalmanFilter::UpdateOdomEstimation(
   // assignment
   //
   // get deltas:
+  size_t index_curr = 1;
+  size_t index_prev = 0;
+  Eigen::Vector3d angular_delta = Eigen::Vector3d::Zero();
+  if (!(GetAngularDelta(index_curr, index_prev, angular_delta, angular_vel_mid))){
+      std::cout << "GetAngularDelta() failed!" << std::endl;
+  };
 
   // update orientation:
+  Eigen::Matrix3d R_curr = Eigen::Matrix3d::Identity();
+  Eigen::Matrix3d R_prev = Eigen::Matrix3d::Identity();
+  UpdateOrientation(angular_delta, R_curr, R_prev);
 
   // get velocity delta:
+  double T;
+  Eigen::Vector3d velocity_delta;
+  if (! ( GetVelocityDelta(index_curr, index_prev, R_curr, R_prev, T, velocity_delta, linear_acc_mid) ) ) {
+      std::cout << "GetVelocityDelta() failed!" << std::endl;
+  };
 
   // save mid-value unbiased linear acc for error-state update:
 
   // update position:
+  UpdatePosition(T, velocity_delta);
 }
 
 /**
@@ -518,6 +533,13 @@ void ErrorStateKalmanFilter::SetProcessEquation(const Eigen::Matrix3d &C_nb,
                                                 const Eigen::Vector3d &w_b) {
   // TODO: set process / system equation:
   // a. set process equation for delta vel:
+  F_.setZero();
+  F_.block<3, 3>(kIndexErrorPos, kIndexErrorVel) = Eigen::Matrix3d::Identity(); //(0,3)
+  F_.block<3, 3>(kIndexErrorVel, kIndexErrorOri) = -C_nb * Sophus::SO3d::hat(f_b).matrix(); //(3,6)
+  F_.block<3, 3>(kIndexErrorVel, kIndexErrorAccel) = -C_nb; //(3,9)
+  F_.block<3, 3>(kIndexErrorOri, kIndexErrorOri) = - Sophus::SO3d::hat(w_b).matrix(); //(6,6)
+  F_.block<3, 3>(kIndexErrorOri, kIndexErrorGyro) = Eigen::Matrix3d::Identity(); //(6,12)
+
 
   // b. set process equation for delta ori
 }
