@@ -555,7 +555,7 @@ void ErrorStateKalmanFilter::UpdateErrorEstimation(
   // TODO: get discretized process equations:
 
   //
-  // TODO: perform Kalman prediction
+  // : perform Kalman prediction
   //
 }
 
