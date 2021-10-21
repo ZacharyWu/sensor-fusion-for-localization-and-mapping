@@ -595,7 +595,7 @@ void ErrorStateKalmanFilter::UpdateErrorEstimation(
   B.block<3, 3>(kIndexErrorGyro, kIndexNoiseBiasGyro) = std::sqrt(T) * B_.block<3, 3>(kIndexErrorGyro, kIndexNoiseBiasGyro);  // (12,9)
 
   //
-  // : perform Kalman prediction
+  // TODO: perform Kalman prediction
   //
   P_ = F * P_ * F.transpose() + B * Q_ * B.transpose(); // Variance 
 
@@ -613,8 +613,8 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPose(
   // TODO: set measurement:
   //
   Eigen::Vector3d dp = pose_.block<3, 1>(0, 3) - T_nb.block<3, 1>(0, 3); // delta_p = ~p (predict) - p (observe/measurement)
-  Eigen::Matrix3d dR = T_nb.block<3, 3>(0, 0).transpose() * pose_.block<3, 3>(0, 0); // R.T (observe) * ~R (predict)
-  Eigen::Vector3d dtheta = Sophus::SO3d::vee(dR - Eigen::Matrix3d::Identity());   // delta_
+  Eigen::Matrix3d dR = T_nb.block<3, 3>(0, 0).transpose() * pose_.block<3, 3>(0, 0); // delta_R = R.T (observe/measurement) * ~R (predict)
+  Eigen::Vector3d dtheta = Sophus::SO3d::vee(dR - Eigen::Matrix3d::Identity());   // delta_θ = (delta_R - I)v
   
   YPose_.block<3, 1>(0, 0) = dp;
   YPose_.block<3, 1>(3, 0) = dtheta;
