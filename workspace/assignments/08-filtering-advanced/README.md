@@ -75,6 +75,12 @@ rosbag play kitti_lidar_only_2011_10_03_drive_0027_synced.bag
 
     * ESKF实现
 
+
+### Answer: 补全代码、编译运行.
+
+#### in error_state_kalman_filter.cpp [here](src/lidar_localization/src/models/kalman_filter/error_state_kalman_filter.cpp)
+
+
 ### 良好要求: 实现新模型,且部分路段性能有改善
 
 相比及格要求, 变化不大, 编码完成后, 保存结果, 进行**evo**评估即可.
