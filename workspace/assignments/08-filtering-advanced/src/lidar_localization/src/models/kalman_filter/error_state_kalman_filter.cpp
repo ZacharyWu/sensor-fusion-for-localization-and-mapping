@@ -526,7 +526,7 @@ void ErrorStateKalmanFilter::UpdateOdomEstimation(
 }
 
 /**
- * @brief  set process equation
+ * @brief  set process equation - PPT workflow step1
  * @param  C_nb, rotation matrix, body frame -> navigation frame
  * @param  f_n, accel measurement in navigation frame
  * @return void
@@ -602,15 +602,17 @@ void ErrorStateKalmanFilter::UpdateErrorEstimation(
 }
 
 /**
- * @brief  correct error estimation using pose measurement
+ * @brief  correct error estimation using pose measurement 
  * @param  T_nb, input pose measurement
  * @return void
  */
 void ErrorStateKalmanFilter::CorrectErrorEstimationPose(
     const Eigen::Matrix4d &T_nb, Eigen::VectorXd &Y, Eigen::MatrixXd &G,
     Eigen::MatrixXd &K) {
+  
+  //// measurement equation - PPT workflow step2 
   //
-  // TODO: set measurement:
+  // TODO: set measurement: 
   //
   Eigen::Vector3d dp = pose_.block<3, 1>(0, 3) - T_nb.block<3, 1>(0, 3); // delta_p = ~p (predict) - p (observe/measurement)
   Eigen::Matrix3d dR = T_nb.block<3, 3>(0, 0).transpose() * pose_.block<3, 3>(0, 0); // delta_R = R.T (observe/measurement) * ~R (predict)
@@ -621,11 +623,17 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPose(
   Y = YPose_;
 
   // set measurement equation:
+  GPose_.setZero();
+  GPose_.block<3, 3>(0, kIndexErrorPos) = Eigen::Matrix3d::Identity();
+  GPose_.block<3, 3>(3, kIndexErrorOri) = Eigen::Matrix3d::Identity();
+  // C is I matrix, can be skipped
+  CPose_.setZero();
+  CPose_.block<3, 3>(0, 0) = Eigen::Matrix3d::Identity();
+  CPose_.block<3, 3>(3, 3) = Eigen::Matrix3d::Identity();
 
-  //
   // TODO: set Kalman gain:
-  //             
-
+  K = P_ * G.transpose() * (G * P_ * G.transpose() + RPose_).inverse(); // Equ(3)              
+  // K = P_ * G.transpose() * (G * P_ * G.transpose() + CPose_ * RPose_ * CPose_.transpose()).inverse(); // Equ(3)
 
 }
 
