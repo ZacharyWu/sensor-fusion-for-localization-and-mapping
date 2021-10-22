@@ -1,3 +1,7 @@
 {
-    "ros.distro": "melodic"
+    "ros.distro": "melodic",
+    "files.associations": {
+        "core": "cpp",
+        "numericaldiff": "cpp"
+    }
 }

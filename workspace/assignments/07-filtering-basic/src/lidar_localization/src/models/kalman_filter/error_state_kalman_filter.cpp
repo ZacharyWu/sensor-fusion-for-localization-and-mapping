@@ -588,12 +588,14 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPose(
   GPose_.block<3, 3>(0, kIndexErrorPos) = Eigen::Matrix3d::Identity();
   GPose_.block<3, 3>(3, kIndexErrorOri) = Eigen::Matrix3d::Identity();
   G = GPose_;
+  // C is I matrix, can be skipped
   CPose_.setZero();
   CPose_.block<3, 3>(0, 0) = Eigen::Matrix3d::Identity();
   CPose_.block<3, 3>(3, 3) = Eigen::Matrix3d::Identity();
 
-  // TODO: set Kalman gain:              
-  K = P_ * G.transpose() * (G * P_ * G.transpose() + CPose_ * RPose_ * CPose_.transpose()).inverse(); // Equ(3)
+  // TODO: set Kalman gain:
+  K = P_ * G.transpose() * (G * P_ * G.transpose() + RPose_).inverse(); // Equ(3)              
+  // K = P_ * G.transpose() * (G * P_ * G.transpose() + CPose_ * RPose_ * CPose_.transpose()).inverse(); // Equ(3)
 }
 
 /**
