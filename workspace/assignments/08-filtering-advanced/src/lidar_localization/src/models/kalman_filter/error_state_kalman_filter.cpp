@@ -631,7 +631,7 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPose(
   CPose_.block<3, 3>(0, 0) = Eigen::Matrix3d::Identity();
   CPose_.block<3, 3>(3, 3) = Eigen::Matrix3d::Identity();
 
-  // TODO: set Kalman gain:
+  // TODO: set Kalman gain: - PPT workflow step3 
   K = P_ * G.transpose() * (G * P_ * G.transpose() + RPose_).inverse(); // Equ(3)              
   // K = P_ * G.transpose() * (G * P_ * G.transpose() + CPose_ * RPose_ * CPose_.transpose()).inverse(); // Equ(3)
 
@@ -650,6 +650,15 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPoseVel(
     //
     // TODO: set measurement:
     //
+    Eigen::Vector3d P_nn_obs = pose_.block<3, 1>(0,3) - T_nb.block<3, 1>(0, 3);
+    Eigen::Matrix3d C_nn_obs = T_nb.block<3, 3>(0,0).transpose() * pose_.block<3, 3>(0, 0);
+    Eigen::Vector3d v_bb_obs = pose_.block<3, 3>(0,0).transpose() * vel_ - v_b;
+
+    YPoseVel_.block<3, 1>(0, 0) = P_nn_obs;
+    YPoseVel_.block<3, 1>(3, 0) = Sophus::SO3d::vee(C_nn_obs - Eigen::Matrix::Identity());
+    YPoseVel_.block<3, 1>(6, 0) = v_bb_obs;
+
+    Y = YPoseVel_;
 
     // set measurement equation:
 
@@ -698,6 +707,7 @@ void ErrorStateKalmanFilter::CorrectErrorEstimation(
   case MeasurementType::POSE_VEL:
     //
     // TODO: register new correction logic here:
+    CorrectErrorEstimationPoseVel(measurement.T_nb, measurement.v_b, measurement.w_b, Y, G, K);
     //
     break;
   case MeasurementType::POSI_VEL:
@@ -712,6 +722,9 @@ void ErrorStateKalmanFilter::CorrectErrorEstimation(
   //
   // TODO: perform Kalman correct:
   //
+  P_ = (MatrixP::Identity() - K * G) * P_;    // Equ(4)
+  X_ = X_ + K * (Y - G * X_);     // Equ(5)
+
 }
 
 /**
@@ -721,14 +734,23 @@ void ErrorStateKalmanFilter::CorrectErrorEstimation(
  */
 void ErrorStateKalmanFilter::EliminateError(void) {
   //
-  // TODO: correct state estimation using the state of ESKF
+  // TODO: correct state estimation using the state of ESKF - PPT workflow step4
   //
   // a. position:
   // do it!
+  pose_.block<3, 1>(0, 3) -= X_.block<3, 1>(kIndexErrorPos, 0);
+
   // b. velocity:
   // do it!
+  vel_ -= X_.block<3, 1>(kIndexErrorVel, 0);
+
   // c. orientation:
   // do it!
+  Eigen::Matrix3d dtheta_corss = Sophus::SO3d::hat(X_.block<3, 1>(kIndexErrorOri, 0));
+  pose_.block<3, 3>(0, 0) = pose_.block<3, 3>(0, 0) * (Eigen::Matrix3d::Identity() - dtheta_corss);
+  Eigen::Quaterniond q_tmp(pose_.block<3, 3>(0, 0));
+  q_tmp.normalize();
+  pose_.block<3, 3>(0, 0) =q_tmp.toRotationMatrix();
 
   // d. gyro bias:
   if (IsCovStable(kIndexErrorGyro)) {
