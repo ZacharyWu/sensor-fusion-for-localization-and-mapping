@@ -141,7 +141,21 @@ evo_ape kitti ground_truth.txt fused.txt -r full --plot --plot_mode xy
 
 ### Answer: 调教参数，对比精度.
 
-<img src="Q2_tune_parameters.png" alt="Q2_tune_parameters" width="100%">
+#### Before tuning parameters:
+
+<img src="doc/images/Q2_tune_parameters.png" alt="Q2_tune_parameters" width="100%">
+
+
+#### After tuning parameters:
+
+<img src="doc/images/Q2_after_tune_parameters.png" alt="Q2_after_tune_parameters" width="100%">
+
+<img src="doc/images/Q2_after_tunning_parameters_Satistics.png" alt="Q2_after_tunning_parameters_Satistics" width="100%">
+
+<img src="doc/images/Q2_after_tunning_parameters_ape_raw.png" alt="Q2_after_tunning_parameters_ape_raw" width="100%">
+
+<img src="doc/images/Q2_after_tunning_parameters_ape_map.png" alt="Q2_after_tunning_parameters_ape_map" width="100%">
+
 
 
 ### 优秀要求: 在前面的模型推导中, 考虑了器件误差中的随机游走, 请给出不考虑随机游走模型时的推导过程，并在工程框架中实现。对比这两种方法的性能差异(最好给出原因分析)。另外，kalman滤波的性能对噪声的设置较为敏感，请在提供结果的同时，给出不同噪声设置情况下的结果对比(至少5组参数)
