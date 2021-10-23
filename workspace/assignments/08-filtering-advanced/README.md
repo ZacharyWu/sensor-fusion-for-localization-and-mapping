@@ -80,6 +80,44 @@ rosbag play kitti_lidar_only_2011_10_03_drive_0027_synced.bag
 
 #### in error_state_kalman_filter.cpp [here](src/lidar_localization/src/models/kalman_filter/error_state_kalman_filter.cpp)
 
+#### Correct Error Estimation PoseVel Interface:
+
+<img src="doc/images/Q1_Correct_Error_Estimation_PoseVel.png" alt="Q1_Correct_Error_Estimation_PoseVel" width="100%">
+
+#### Implementation: 
+
+<img src="doc/images/Q1_correct_error_estimation.png" alt="Q1_correct_error_estimation" width="100%">
+
+#### Compilation: 
+
+<img src="doc/images/Q1_compilation.png" alt="Q1_compilation" width="100%">
+
+#### Shell ouput: 
+
+<img src="doc/images/Q1_shell_output.png" alt="Q1_shell_output" width="100%">
+
+#### Play Ros bag: 
+
+<img src="doc/images/Q1_play_bag.png" alt="Q1_play_bag" width="100%">
+
+#### Running Rviz Visulization: 
+
+<img src="doc/images/Q1_rviz.png" alt="Q1_rviz" width="100%">
+
+<img src="doc/images/Q1_rviz2.png" alt="Q1_rviz2" width="100%">
+
+<img src="doc/images/Q1_rviz3.png" alt="Q1_rviz3" width="100%">
+
+<img src="doc/images/Q1_rviz4.png" alt="Q1_rviz4" width="100%">
+
+<img src="doc/images/Q1_rviz5.png" alt="Q1_rviz5" width="100%">
+
+<img src="doc/images/Q1_rviz6.png" alt="Q1_rviz6" width="100%">
+
+#### Finish Running Rviz: 
+
+<img src="doc/images/Q1_finish_running.png" alt="Q1_finish_running" width="100%">
+
 
 ### 良好要求: 实现新模型,且部分路段性能有改善
 
@@ -98,6 +136,39 @@ evo_ape kitti ground_truth.txt laser.txt -r full --plot --plot_mode xy
 # b. fused:
 evo_ape kitti ground_truth.txt fused.txt -r full --plot --plot_mode xy
 ```
+
+### Answer: **evo**评估精度.
+
+#### Lidar Only RMSE:
+
+<img src="doc/images/evo/Q2_Lidar_only_mrse.png" alt="Q2_Lidar_only_mrse" width="100%">
+
+#### Lidar Only Raw:
+
+<img src="doc/images/evo/Q2_Lidar_only_raw.png" alt="Q2_Lidar_only_raw" width="100%">
+
+#### Lidar Only Map:
+
+<img src="doc/images/evo/Q2_Lidar_only_map.png" alt="v" width="100%">
+
+#### Fused Only RMSE:
+
+<img src="doc/images/evo/Q2_fused_only_mrse.png" alt="Q2_fused_only_mrse" width="100%">
+
+#### Fused Raw:
+
+<img src="doc/images/evo/Q2_fused_raw.png" alt="Q2_fused_raw" width="100%">
+
+#### Fused Map:
+
+<img src="doc/images/evo/Q2_fused_map.png" alt="Q2_fused_map" width="100%">
+
+#### Fused vs. Lidar RMSE:
+
+<img src="doc/images/evo/Q2_Lidar_vs_fused_mrse.png" alt="Q2_Lidar_vs_fused_mrse" width="100%">
+
+#### Findings: Fused evo statistics show that rmse is lower, and max/min/mean/median are also lower, which indicts the fused method performance is better. 
+
 
 ### 优秀要求: 在良好的基础上,增加编码器融合的内容,具体如下: 使用GNSS-Sim的仿真数据,实现以gps位置和编码器速度为观测量的融合方法,并分析其精度
 

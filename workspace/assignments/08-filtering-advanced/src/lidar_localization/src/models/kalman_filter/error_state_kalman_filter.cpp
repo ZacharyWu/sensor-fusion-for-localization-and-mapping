@@ -532,13 +532,13 @@ void ErrorStateKalmanFilter::UpdateOdomEstimation(
  * @return void
  */
 void ErrorStateKalmanFilter::SetProcessEquation(const Eigen::Matrix3d &C_nb,    // R
-                                                const Eigen::Vector3d &f_n,
+                                                const Eigen::Vector3d &f_n,     // accel
                                                 const Eigen::Vector3d &w_b) {   // w
   // TODO: set process / system equation:
   // a. set process equation for delta vel: just for the velocity row
   F_.setZero();
   F_.block<3, 3>(kIndexErrorPos, kIndexErrorVel) = Eigen::Matrix3d::Identity(); //(0,3)
-  F_.block<3, 3>(kIndexErrorVel, kIndexErrorOri) = -C_nb * Sophus::SO3d::hat(f_b).matrix(); //(3,6): -R[a]x
+  F_.block<3, 3>(kIndexErrorVel, kIndexErrorOri) = -C_nb * Sophus::SO3d::hat(f_n).matrix(); //(3,6): -R[a]x
   F_.block<3, 3>(kIndexErrorVel, kIndexErrorAccel) = -C_nb; //(3,9): -R
   F_.block<3, 3>(kIndexErrorOri, kIndexErrorOri) = - Sophus::SO3d::hat(w_b).matrix(); //(6,6): -[w]x
   F_.block<3, 3>(kIndexErrorOri, kIndexErrorGyro) = Eigen::Matrix3d::Identity(); //(6,12)
@@ -583,7 +583,7 @@ void ErrorStateKalmanFilter::UpdateErrorEstimation(
   static MatrixF F_2nd;
 
   // TODO: update process equation:
-  updateProcessEquation(linear_acc_mid, angular_vel_mid);
+  UpdateProcessEquation(linear_acc_mid, angular_vel_mid);
 
   // TODO: get discretized process equations:
   F_1st = T * F_;
@@ -655,7 +655,7 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPoseVel(
     Eigen::Vector3d v_bb_obs = pose_.block<3, 3>(0,0).transpose() * vel_ - v_b;
 
     YPoseVel_.block<3, 1>(0, 0) = P_nn_obs;
-    YPoseVel_.block<3, 1>(3, 0) = Sophus::SO3d::vee(C_nn_obs - Eigen::Matrix::Identity());
+    YPoseVel_.block<3, 1>(3, 0) = Sophus::SO3d::vee(C_nn_obs - Eigen::Matrix3d::Identity());
     YPoseVel_.block<3, 1>(6, 0) = v_bb_obs;
 
     Y = YPoseVel_;
@@ -669,7 +669,7 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPoseVel(
     //
     // TODO: set Kalman gain:
     //
-    MatrixRPoseVel R = GPoseVel_ * P_ * GPoseVel.transpose() + RPoseVel_;
+    MatrixRPoseVel R = GPoseVel_ * P_ * GPoseVel_.transpose() + RPoseVel_;
     K = P_ * GPoseVel_.transpose() * R.inverse();
 
 }
