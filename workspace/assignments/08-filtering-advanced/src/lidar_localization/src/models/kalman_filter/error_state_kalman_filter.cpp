@@ -661,11 +661,17 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPoseVel(
     Y = YPoseVel_;
 
     // set measurement equation:
-    GPoseVel_
+    GPoseVel_.block<3, 3>(6, kIndexErrorVel) = pose_.block<3, 3>(0,0).transpose();  //(6,3)
+    GPoseVel_.block<3, 3>(6, kIndexErrorOri) = pose_.block<3, 3>(0,0).transpose();  //(6,6)
+
+    G = GPoseVel_;
 
     //
     // TODO: set Kalman gain:
     //
+    MatrixRPoseVel R = GPoseVel_ * P_ * GPoseVel.transpose() + RPoseVel_;
+    K = P_ * GPoseVel_.transpose() * R.inverse();
+
 }
 
 /**
