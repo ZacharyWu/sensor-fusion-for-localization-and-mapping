@@ -657,21 +657,16 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPoseVel(
     YPoseVel_.block<3, 1>(0, 0) = P_nn_obs;
     YPoseVel_.block<3, 1>(3, 0) = Sophus::SO3d::vee(C_nn_obs - Eigen::Matrix3d::Identity());
     YPoseVel_.block<3, 1>(6, 0) = v_bb_obs;
-
     Y = YPoseVel_;
 
     // set measurement equation:
     GPoseVel_.block<3, 3>(6, kIndexErrorVel) = pose_.block<3, 3>(0,0).transpose();  //(6,3)
     GPoseVel_.block<3, 3>(6, kIndexErrorOri) = pose_.block<3, 3>(0,0).transpose();  //(6,6)
-
     G = GPoseVel_;
 
-    //
     // TODO: set Kalman gain:
-    //
     MatrixRPoseVel R = GPoseVel_ * P_ * GPoseVel_.transpose() + RPoseVel_;
     K = P_ * GPoseVel_.transpose() * R.inverse();
-
 }
 
 /**
@@ -685,10 +680,22 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPosiVel(
     Eigen::VectorXd &Y, Eigen::MatrixXd &G, Eigen::MatrixXd &K
 ) {
     // parse measurement:
+    Eigen::Vector3d P_nn_obs = pose_.block<3, 1>(0,3) - T_nb.block<3, 1>(0, 3);
+    Eigen::Vector3d v_bb_obs = pose_.block<3, 3>(0,0).transpose() * vel_ - v_b;
+
+    YPoseVel_.block<3, 1>(0, 0) = P_nn_obs;
+    YPoseVel_.block<3, 1>(3, 0) = v_bb_obs;
+    Y = YPoseVel_;
 
     // set measurement equation:
+    GPoseVel_.block<3, 3>(3, kIndexErrorVel) = pose_.block<3, 3>(0,0).transpose();  //(3,3)
+    GPoseVel_.block<3, 3>(3, kIndexErrorOri) = Sophus::SO3d::hat(pose_.block<3, 3>(0,0).transpose() * vel_);  //(3,6)
+    G = GPoseVel_;
 
     // set Kalman gain:
+    MatrixRPoseVel R = GPoseVel_ * P_ * GPoseVel_.transpose() + RPoseVel_;
+    K = P_ * GPoseVel_.transpose() * R.inverse();
+
 }
 
 /**
@@ -720,6 +727,7 @@ void ErrorStateKalmanFilter::CorrectErrorEstimation(
   case MeasurementType::POSI_VEL:
     //
     // TODO: register new correction logic here:
+    CorrectErrorEstimationPosiVel(measurement.T_nb, measurement.v_b, measurement.w_b, Y, G, K);
     //
     break;
   default:

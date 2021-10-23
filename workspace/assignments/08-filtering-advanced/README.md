@@ -137,7 +137,7 @@ evo_ape kitti ground_truth.txt laser.txt -r full --plot --plot_mode xy
 evo_ape kitti ground_truth.txt fused.txt -r full --plot --plot_mode xy
 ```
 
-### Answer: **evo**评估精度.
+### Answer: **evo**评估精度
 
 #### Lidar Only RMSE:
 
@@ -248,3 +248,13 @@ rosbag play virtual_proving_ground.bag
 * **红色**轨迹为融合后的估计值
 
 <img src="doc/images/gnss-ins-sim-demo.png" alt="Demo, GNSS-INS-Sim Estimation" width="100%">
+
+### Answer: 使用GNSS-Sim的仿真数据,实现以gps位置和编码器速度为观测量的融合方法,并分析其精度
+
+#### Code Update: 
+
+<img src="doc/images/Q3/Q3_code_update.png" alt="Q3_code_update" width="100%">
+
+#### Compilation
+
+<img src="doc/images/Q3/Q3_compilation.png" alt="Q3_compilation" width="100%">
