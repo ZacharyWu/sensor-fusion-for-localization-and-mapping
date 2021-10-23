@@ -661,6 +661,7 @@ void ErrorStateKalmanFilter::CorrectErrorEstimationPoseVel(
     Y = YPoseVel_;
 
     // set measurement equation:
+    GPoseVel_
 
     //
     // TODO: set Kalman gain:
