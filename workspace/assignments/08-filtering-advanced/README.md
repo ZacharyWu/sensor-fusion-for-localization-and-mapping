@@ -262,3 +262,4 @@ rosbag play virtual_proving_ground.bag
 #### gnss_ins_sim compilation
 
 <img src="doc/images/Q3/Q3_gnss_ins_sim_compilation.png" alt="Q3_gnss_ins_sim_compilation" width="100%">
+
