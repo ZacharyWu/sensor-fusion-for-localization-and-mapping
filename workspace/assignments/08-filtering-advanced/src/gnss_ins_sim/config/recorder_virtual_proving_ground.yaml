@@ -30,6 +30,6 @@ topic_name:
     reference_trajectory: /reference_pose
     
 # output rosbag path:
-output_path: /workspace/data/gnss_ins_sim
+output_path: /home/zachary/Desktop/sensor-fusion-for-localization-and-mapping/workspace/data/gnss_ins_sim
 # output name:
 output_name: virtual_proving_ground.bag
