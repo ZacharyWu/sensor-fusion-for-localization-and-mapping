@@ -9,6 +9,6 @@ sample_frequency:
 # topic name:
 topic_name: /sim/sensor/imu
 # output rosbag path:
-output_path: /workspace/data/gnss_ins_sim/deterministic_error
+output_path: /home/zachary/Desktop/sensor-fusion-for-localization-and-mapping/workspace/data/gnss_ins_sim/deterministic_error
 # output name:
 output_name: data.csv
