@@ -65,6 +65,7 @@ public:
 			updateMeasurement(d_b_a_i, d_b_g_i);
 		}
 		
+		// compute error:
 		const Eigen::Vector3d &alpha_ij = _measurement.block<3, 1>(INDEX_P, 0);
 		const Eigen::Vector3d &theta_ij = _measurement.block<3, 1>(INDEX_R, 0);
 		const Eigen::Vector3d  &beta_ij = _measurement.block<3, 1>(INDEX_V, 0);

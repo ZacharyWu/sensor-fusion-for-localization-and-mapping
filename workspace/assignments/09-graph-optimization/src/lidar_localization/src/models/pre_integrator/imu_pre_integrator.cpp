@@ -233,12 +233,12 @@ void IMUPreIntegrator::UpdateState(void) {
     // 2. update relative orientation, so3:
     prev_theta_ij = state.theta_ij_;
     d_theta_ij = Sophus::SO3d::exp(w_mid * T);
-    state.theta_ij = state.theta_ij_ * d_theta_ij;
+    state.theta_ij_ = state.theta_ij_ * d_theta_ij;
     curr_theta_ij = state.theta_ij_;
     // 3. get a_mid:
-    a_mid = 0.5 * (prev_theta_ij * prev_a + curr_thera_ij * curr_a);
+    a_mid = 0.5 * (prev_theta_ij * prev_a + curr_theta_ij * curr_a);
     // 4. update relative translation:
-    state.alpha_ij += state.beta_ij_ * T + 0.5 * a_mid * T * T;
+    state.alpha_ij_ += state.beta_ij_ * T + 0.5 * a_mid * T * T;
     // 5. update relative velocity:
     state.beta_ij_ += a_mid * T;
 
@@ -289,7 +289,7 @@ void IMUPreIntegrator::UpdateState(void) {
     // TODO: 4. update P_:
     MatrixF F = MatrixF::Identity() + T * F_;
     MatrixB B =T * B_;
-    P_ = F * P_ * F.transpose() + B * Q_ * B.transpose();
+    P_ = F * P_ * F.transpose() + B * Q_ * B.transpose(); 
     // 
     // TODO: 5. update Jacobian:
     //

@@ -68,6 +68,7 @@ public:
         _estimate = PRVAG();
     }
 
+    // update
     virtual void oplusImpl(const double *update) override {
         _estimate.pos += Eigen::Vector3d(
             update[PRVAG::INDEX_POS + 0], update[PRVAG::INDEX_POS + 1], update[PRVAG::INDEX_POS + 2]
