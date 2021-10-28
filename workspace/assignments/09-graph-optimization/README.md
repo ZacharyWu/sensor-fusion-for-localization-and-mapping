@@ -110,6 +110,13 @@ rosservice call /save_scan_context
 
 <img src="doc/Q1/Q1_code_Compilation.png" alt="Q1_code_Compilation" width="100%">
 
+<img src="doc/Q1/Q1_play_bag.png" alt="Q1_play_bag" width="100%">
+
+<img src="doc/Q1/Q1_lio_mapping_running.png" alt="Q1_lio_mapping_running" width="100%">
+
+<img src="doc/Q1/Q1_saved_map.png" alt="Q1_saved_map" width="100%">
+
+<img src="doc/Q1/Q1_saved_map2.png" alt="Q1_saved_map2" width="100%">
 
 ### 良好要求: 在及格基础上, 实现和不加IMU时的效果对比和分析
 
