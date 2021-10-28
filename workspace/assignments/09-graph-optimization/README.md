@@ -86,7 +86,9 @@ rosservice call /save_scan_context
     * **LIO Backend Config** [here](src/lidar_localization/config/mapping/lio_back_end.yaml)
 
 
-### Answers: **公式推导**
+## Answers: 
+
+**公式推导**
 
 
 **补全代码**
@@ -106,6 +108,9 @@ rosservice call /save_scan_context
 2. 由于数据集的老问题, 部分指标可能与预期不一致, 且地图质量无法量化, 因此给出自己的分析即可.
 
 干就完了! 期待你的精彩发挥.
+
+## Answers:
+
 
 ### 优秀要求: 在良好的基础上，完成融合编码器时预积分公式的推导(方差递推、残差对状态量雅可比、bias更新等)
 
