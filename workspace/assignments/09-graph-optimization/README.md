@@ -97,10 +97,18 @@ rosservice call /save_scan_context
 
 ### Code updated
 
+<img src="doc/Q1/Q1_code_update_mean.png" alt="Q1_code_update_mean" width="100%">
+
+<img src="doc/Q1/Q1_code_update_covariance.png" alt="Q1_code_update_covariance" width="100%">
+
+<img src="doc/Q1/Q1_code_update_set_up_F.png" alt="Q1_code_update_set_up_F" width="100%">
+
+<img src="doc/Q1/Q1_code_update_set_up_G_P_J.png" alt="Q1_code_update_set_up_G_P_J" width="100%">
 
 
+### Compilation & Running
 
-
+<img src="doc/Q1/Q1_code_Compilation.png" alt="Q1_code_Compilation" width="100%">
 
 
 ### 良好要求: 在及格基础上, 实现和不加IMU时的效果对比和分析

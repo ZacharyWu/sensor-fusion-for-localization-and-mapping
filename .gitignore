@@ -5,3 +5,4 @@ README_all.md
 workspace/assignments/06-imu-navigation/src/gnss_ins_sim/config/recorder_allan_variance_analysis.yaml
 workspace/assignments/06-imu-navigation/src/gnss_ins_sim/config/recorder_deterministic_error_calib.yaml
 workspace/assignments/.DS_Store
+workspace/assignments/09-graph-optimization/doc/.DS_Store
