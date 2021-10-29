@@ -254,6 +254,9 @@ bool CeresSlidingWindow::Optimize() {
             ceres::LocalParameterization *local_parameterization = new sliding_window::ParamPRVAG();
 
             // TODO: add parameter block:
+
+
+            
         }
 
         // TODO: add residual blocks:
@@ -314,6 +317,9 @@ bool CeresSlidingWindow::Optimize() {
                 );
 
                 // TODO: add map matching factor into sliding window
+
+
+
             }            
         }
 
@@ -328,6 +334,10 @@ bool CeresSlidingWindow::Optimize() {
                 );
 
                 // TODO: add relative pose factor into sliding window
+
+
+
+
             }
         }
 
@@ -342,6 +352,9 @@ bool CeresSlidingWindow::Optimize() {
                 );
 
                 // TODO: add IMU factor into sliding window
+
+
+
             }
         }
 

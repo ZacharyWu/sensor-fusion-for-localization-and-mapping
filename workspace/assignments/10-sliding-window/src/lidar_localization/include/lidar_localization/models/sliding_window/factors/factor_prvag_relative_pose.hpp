@@ -57,17 +57,23 @@ public:
     //
     // TODO: get square root of information matrix:
     //
-
+    Eigen::Matrix<double, 6, 6> sqrt_info = Eigen::LLT<Eigen::Matrix<double, 6, 6>>(
+      I_
+    ).matrixL().transpose();
 
     //
     // TODO: compute residual:
     //
+    Eigen::Map<Eigen::Matrix<double, 6, 1>> residual(residuals);
+    residuals.block(INDEX_P, 0, 3, 1) = ori_i.inverse() * (pos_j - pos_i) - pos_ij;
+    residuals.block(INDEX_P, 0, 3, 1) = (ori_i.inverse() * ori_j * ori_ij.inverse()).log();
 
     //
     // TODO: compute jacobians:
     //
     if ( jacobians ) {
       // compute shared intermediate results:
+      const Eigen::Matrix3d R_i_inv = ori
 
       if ( jacobians[0] ) {
         // implement computing:
