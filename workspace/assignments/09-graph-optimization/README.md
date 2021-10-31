@@ -177,6 +177,9 @@ evo_ape kitti ground_truth.txt optimized.txt -r full --plot --plot_mode xy
 <img src="doc/Q2/optimized/raw.png" alt="raw" width="100%">
 
 
+Comparing the before and the after IMU engaged, I found that the overall accuacy did not change apparently. This may be the IMU source data was modified by Kitti. Also, the globle mapping may smooth the minor changes, which overwhelmed the optimaization updates. 
+
+
 
 ### 优秀要求: 在良好的基础上，完成融合编码器时预积分公式的推导(方差递推、残差对状态量雅可比、bias更新等)
 
