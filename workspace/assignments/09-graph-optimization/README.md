@@ -151,6 +151,32 @@ rosservice call /save_scan_context
 
 ## Answers:
 
+in the directory: [here](src/lidar_localization/slam_data/trajectory)
+
+```bash
+# run evo evaluation:
+# a. laser:
+evo_ape kitti ground_truth.txt laser_odom.txt -r full --plot --plot_mode xy
+# b. fused:
+evo_ape kitti ground_truth.txt optimized.txt -r full --plot --plot_mode xy
+```
+### laser_odom:
+
+<img src="doc/Q2/laser_odom/RMSE.png" alt="RMSE" width="100%">
+
+<img src="doc/Q2/laser_odom/map.png" alt="map" width="100%">
+
+<img src="doc/Q2/laser_odom/raw.png" alt="raw" width="100%">
+
+### optimized:
+
+<img src="doc/Q2/optimized/RMSE.png" alt="RMSE" width="100%">
+
+<img src="doc/Q2/optimized/map.png" alt="map" width="100%">
+
+<img src="doc/Q2/optimized/raw.png" alt="raw" width="100%">
+
+
 
 ### 优秀要求: 在良好的基础上，完成融合编码器时预积分公式的推导(方差递推、残差对状态量雅可比、bias更新等)
 
