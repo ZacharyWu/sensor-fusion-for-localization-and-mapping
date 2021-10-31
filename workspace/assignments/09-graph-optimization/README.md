@@ -90,6 +90,28 @@ rosservice call /save_scan_context
 
 **公式推导**
 
+#### 位置position残差雅可比
+
+<img src="doc/jacobian/position_jacobian.png" alt="position_jacobian" width="100%">
+<img src="doc/jacobian/position_jacobian2.png" alt="position_jacobian2" width="30%">
+
+#### 姿态pose残差雅可比
+
+<img src="doc/jacobian/pose_jacobian.png" alt="pose_jacobian" width="100%">
+<img src="doc/jacobian/pose_jacobian2.png" alt="pose_jacobian2" width="100%">
+
+#### 速度velocity残差雅可比
+
+<img src="doc/jacobian/vel_jacobian.png" alt="vel_jacobian" width="100%">
+<img src="doc/jacobian/vel_jacobian2.png" alt="vel_jacobian2" width="30%">
+
+#### 加速度acc bias残差雅可比
+
+<img src="doc/jacobian/acc_jacobian.png" alt="acc_jacobian" width="100%">
+
+#### 角速度gyro bias残差雅可比
+
+<img src="doc/jacobian/gyro_jacobian.png" alt="gyro_jacobian" width="100%">
 
 
 
