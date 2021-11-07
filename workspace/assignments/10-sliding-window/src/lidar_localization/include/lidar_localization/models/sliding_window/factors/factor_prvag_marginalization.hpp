@@ -48,11 +48,13 @@ public:
     // TODO: Update H:
     //
     // a. H_mm:
+    H_.block<15, 15>(INDEX_M, INDEX_M) += J_m.transpose() * J_m; // (INDEX_M = 0,0)
 
     //
     // TODO: Update b:
     //
     // a. b_m:
+    b_.block<15,  1>(INDEX_M,      0) += J_m.transpose() * residual; 
   }
 
   void SetResRelativePose(
@@ -73,16 +75,21 @@ public:
     // TODO: Update H:
     //
     // a. H_mm:
+    H_.block<15, 15>(INDEX_M, INDEX_M) += J_m.transpose() * J_m;  //  (0,  0)
     // b. H_mr:
+    H_.block<15, 15>(INDEX_M, INDEX_R) += J_m.transpose() * J_r;  //  (0, 15)    
     // c. H_rm:
+    H_.block<15, 15>(INDEX_R, INDEX_M) += J_r.transpose() * J_m;  //  (15, 0)
     // d. H_rr:
-
+    H_.block<15, 15>(INDEX_R, INDEX_R) += J_r.transpose() * J_r;  //  (15,15)
 
     //
     // TODO: Update b:
     //
     // a. b_m:
+    b_.block<15, 1>(INDEX_M, 0) += J_m.transpose() * residuals;
     // a. b_r:
+
   }
 
   void SetResIMUPreIntegration(
@@ -106,7 +113,7 @@ public:
     // b. H_mr:
     // c. H_rm:
     // d. H_rr:
-
+    
 
     //
     // Update b:
