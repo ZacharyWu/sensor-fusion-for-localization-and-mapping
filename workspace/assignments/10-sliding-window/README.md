@@ -93,6 +93,46 @@ rosservice call /save_odometry
 * **Module Hyper Params.**
     * **Sliding Window Config** [here](src/lidar_localization/config/matching/sliding_window.yaml)
 
+
+**补全代码**
+
+### Code updated
+
+fill up map matching pose:
+
+<img src="doc/code_updated_marginalization/code_updated_map_matching_pose.png" alt="code_updated_map_matching_pose" width="100%">
+
+fill up LiDAR odometry relative pose:
+
+<img src="doc/code_updated_marginalization/code_updated_LO_relative_pose.png" alt="code_updated_LO_relative_pose" width="100%">
+
+fill up IMU_Pre-Integration:
+
+<img src="doc/code_updated_marginalization/code_updated_IMU_Pre-Integration.png" alt="code_updated_IMU_Pre-Integration" width="100%">
+
+fill up marginalization:
+
+<img src="doc/code_updated_marginalization/code_updated_marginalization.png" alt="code_updated_marginalization" width="100%">
+
+fill up evaluation:
+
+<img src="doc/code_updated_marginalization/code_updated_evaluate.png" alt="code_updated_evaluate" width="100%">
+
+### Compilation & Running
+
+<img src="doc/Q1/Q1_code_Compilation.png" alt="Q1_code_Compilation" width="100%">
+
+<img src="doc/Q1/Q1_play_bag.png" alt="Q1_play_bag" width="100%">
+
+<img src="doc/Q1/Q1_lio_mapping_running.png" alt="Q1_lio_mapping_running" width="100%">
+
+<img src="doc/Q1/Q1_saved_map.png" alt="Q1_saved_map" width="100%">
+
+<img src="doc/Q1/Q1_saved_map2.png" alt="Q1_saved_map2" width="100%">
+
+
+
+
 ### 良好要求: 实现功能的基础上，性能在部分路段比EKF有改善。
 
 **备注**
