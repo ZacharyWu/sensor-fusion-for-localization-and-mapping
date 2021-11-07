@@ -128,9 +128,15 @@ fill up evaluation:
 
 <img src="doc/images/running_results.png" alt="running_results" width="100%">
 
-<img src="doc/images/Q1_saved_map2.png" alt="Q1_saved_map2" width="100%">
+<img src="doc/Q1/lio_localization_running_shell_1.png" alt="lio_localization_running_shell_1" width="100%">
 
+<img src="doc/Q1/lio_localization_running_shell_2.png" alt="lio_localization_running_shell_2" width="100%">
 
+<img src="doc/Q1/lio_localization_running_shell_3.png" alt="lio_localization_running_shell_3" width="100%">
+
+<img src="doc/Q1/lio_localization_rviz_running.png" alt="lio_localization_rviz_running" width="100%">
+
+<img src="doc/Q1/lio_localization_rviz_running_done.png" alt="lio_localization_rviz_running_done" width="100%">
 
 
 ### 良好要求: 实现功能的基础上，性能在部分路段比EKF有改善。

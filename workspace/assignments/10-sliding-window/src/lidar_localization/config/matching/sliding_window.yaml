@@ -1,7 +1,7 @@
 #
 # data output path:
 #
-data_path: ./
+data_path: /home/zachary/Desktop/sensor-fusion-for-localization-and-mapping/workspace/assignments/10-sliding-window/src/lidar_localization/slam_data/trajectory
 
 #
 # key frame detection
