@@ -131,19 +131,39 @@ public:
   void Marginalize(
     const double *raw_param_r_0
   ) {
-    // TODO: implement marginalization logic
+    // TODO: implement marginalization logic - H(b) related 
 
     Eigen::Map<const Eigen::Matrix<double, 15, 1>> x_0(raw_param_r_0);
     x_0_ = x_0;
 
-    const Eigen::MatruxXd &H_mm = H_.block<15, 15>(INDEX_M, INDEX_M);
+    //marginalize:
+    const Eigen::MatrixXd &H_mm = H_.block<15, 15>(INDEX_M, INDEX_M);
+    const Eigen::MatrixXd &H_mr = H_.block<15, 15>(INDEX_M, INDEX_R);
+    const Eigen::MatrixXd &H_rm = H_.block<15, 15>(INDEX_R, INDEX_M);
+    const Eigen::MatrixXd &H_rr = H_.block<15, 15>(INDEX_R, INDEX_R);
 
+    const Eigen::VectorXd &b_m = b_.block<15, 1>(INDEX_M, 0);
+    const Eigen::VectorXd &b_r = b_.block<15, 1>(INDEX_R, 0);
 
+    Eigen::VectorXd H_mm_inv = H_mm.inverse();
+    Eigen::VectorXd H_marginalized = H_rr - H_rm * H_mm_inv * H_mr;
+    Eigen::VectorXd b_marginalized = b_r - H_rm * H_mm_inv * b_m;
 
+    // slove linearized residual & Jacobian
+    Eigen::SelfAdjointEigenSolver<Eigen::MatrixXd> saes(H_marginalized);
+    Eigen::VectorXd S = Eigen::VectorXd(
+      (saes.eigenvalues().array() > 1.0e-5).select(saes.eigenvalues().array(), 0)
+    );
+    Eigen::VectorXd S_inv = Eigen::VectorXd(
+      (saes.eigenvalues().array() > 1.0e-5).select(saes.eigenvalues().array().inverse(), 0)
+    );
 
+    Eigen::VectorXd S_sqrt = S.cwiseSqrt();
+    Eigen::VectorXd S_inv_sqrt = S_inv.cwiseSqrt();
 
-
-
+    // calculate J & e
+    J_ = S_sqrt.asDiagonal() * saes.eigenvectors().transpose();
+    e_ = S_inv_sqrt.asDiagonal() * saes.eigenvectors().transpose() * b_marginalized;
   }
 
   virtual bool Evaluate(double const *const *parameters, double *residuals, double **jacobians) const {	
