@@ -134,7 +134,9 @@ rosservice call /save_scan_context
 
 <img src="doc/Q1/Q1_play_bag.png" alt="Q1_play_bag" width="100%">
 
-<img src="doc/Q1/Q1_lio_mapping_running.png" alt="Q1_lio_mapping_running" width="100%">
+<img src="doc/images/Q1_shell_run.png" alt="Q1_shell_run" width="100%">
+
+<img src="doc/images/Q1_Rviz_running.png" alt="Q1_Rviz_running" width="100%">
 
 <img src="doc/Q1/Q1_saved_map.png" alt="Q1_saved_map" width="100%">
 
