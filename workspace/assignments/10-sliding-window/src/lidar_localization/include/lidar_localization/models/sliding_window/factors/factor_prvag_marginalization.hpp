@@ -54,7 +54,7 @@ public:
     // TODO: Update b:
     //
     // a. b_m:
-    b_.block<15,  1>(INDEX_M,      0) += J_m.transpose() * residual; 
+    b_.block<15,  1>(INDEX_M,       0) += J_m.transpose() * residual; 
   }
 
   void SetResRelativePose(
@@ -89,6 +89,7 @@ public:
     // a. b_m:
     b_.block<15, 1>(INDEX_M, 0) += J_m.transpose() * residuals;
     // a. b_r:
+    
 
   }
 
