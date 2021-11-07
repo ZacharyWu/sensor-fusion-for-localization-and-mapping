@@ -40,7 +40,7 @@
 
 ```bash
 # build:
-catkin config --install && catkin build lidar_localization
+c
 # set up session:
 source install/setup.bash
 # launch:
