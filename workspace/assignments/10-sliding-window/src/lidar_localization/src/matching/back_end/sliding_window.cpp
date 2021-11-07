@@ -363,7 +363,7 @@ bool SlidingWindow::Update(void) {
         //
         if ( measurement_config_.source.imu_pre_integration ) {
             // TODO: add constraint, IMU pre-integraion:
-            sliding_window_ptr -> AddPRVAGIMUPreIntegrationFacotor(
+            sliding_window_ptr_ -> AddPRVAGIMUPreIntegrationFacotor(
                 param_index_i, param_index_j,
                 imu_pre_integration_
             );

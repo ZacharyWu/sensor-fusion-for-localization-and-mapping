@@ -54,7 +54,7 @@ public:
     // TODO: Update b:
     //
     // a. b_m:
-    b_.block<15,  1>(INDEX_M,       0) += J_m.transpose() * residual; 
+    b_.block<15,  1>(INDEX_M,       0) += J_m.transpose() * residuals; 
   }
 
   void SetResRelativePose(
@@ -177,15 +177,12 @@ public:
     // TODO: compute residual:
     //
 
-    Eigen::Map<const Eigen::Matrix<double, 15, 1>> x(parameters[0]);
-    Eigen::VectorXd dx = x - x_0_;
+    Eigen::Map<Eigen::Matrix<double, 15, 1>> residual(residuals);
+    residual = e_ + J_ * dx; 
 
     //
     // TODO: compute jacobian:
     //
-
-    Eigen::Map<Eigen::Matrix<double, 15, 1>> residual(residuals);
-    residual = e_ + J_ * dx; 
 
     if ( jacobians ) {
       if ( jacobians[0] ) {
