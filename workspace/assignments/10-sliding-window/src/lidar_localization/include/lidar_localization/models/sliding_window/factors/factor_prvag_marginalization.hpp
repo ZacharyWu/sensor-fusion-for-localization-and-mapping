@@ -177,12 +177,24 @@ public:
     // TODO: compute residual:
     //
 
+    Eigen::Map<const Eigen::Matrix<double, 15, 1>> x(parameters[0]);
+    Eigen::VectorXd dx = x - x_0_;
+
     //
     // TODO: compute jacobian:
     //
+
+    Eigen::Map<Eigen::Matrix<double, 15, 1>> residual(residuals);
+    residual = e_ + J_ * dx; 
+
     if ( jacobians ) {
       if ( jacobians[0] ) {
         // implement computing:
+        Eigen::Map<Eigen::Matrix<double, 15, 15, Eigen::RowMajor>> jacobian_marginalization( jacobians[0] );
+        jacobian_marginalization.setZero();
+
+        jacobian_marginalization = J_;
+
       }
     }
 
