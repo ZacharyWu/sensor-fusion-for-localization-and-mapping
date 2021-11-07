@@ -120,15 +120,15 @@ fill up evaluation:
 
 ### Compilation & Running
 
-<img src="doc/Q1/Q1_code_Compilation.png" alt="Q1_code_Compilation" width="100%">
+<img src="doc/images/marginalization_compilation_done.png" alt="marginalization_compilation_done" width="100%">
 
-<img src="doc/Q1/Q1_play_bag.png" alt="Q1_play_bag" width="100%">
+<img src="doc/images/play_ros_bag.png" alt="play_ros_bag" width="100%">
 
-<img src="doc/Q1/Q1_lio_mapping_running.png" alt="Q1_lio_mapping_running" width="100%">
+<img src="doc/images/rosbag_play_done.png" alt="rosbag_play_done" width="100%">
 
-<img src="doc/Q1/Q1_saved_map.png" alt="Q1_saved_map" width="100%">
+<img src="doc/images/running_results.png" alt="running_results" width="100%">
 
-<img src="doc/Q1/Q1_saved_map2.png" alt="Q1_saved_map2" width="100%">
+<img src="doc/images/Q1_saved_map2.png" alt="Q1_saved_map2" width="100%">
 
 
 
