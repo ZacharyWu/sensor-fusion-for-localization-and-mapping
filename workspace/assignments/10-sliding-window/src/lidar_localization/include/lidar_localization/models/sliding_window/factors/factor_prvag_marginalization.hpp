@@ -132,6 +132,18 @@ public:
     const double *raw_param_r_0
   ) {
     // TODO: implement marginalization logic
+
+    Eigen::Map<const Eigen::Matrix<double, 15, 1>> x_0(raw_param_r_0);
+    x_0_ = x_0;
+
+    const Eigen::MatruxXd &H_mm = H_.block<15, 15>(INDEX_M, INDEX_M);
+
+
+
+
+
+
+
   }
 
   virtual bool Evaluate(double const *const *parameters, double *residuals, double **jacobians) const {	
