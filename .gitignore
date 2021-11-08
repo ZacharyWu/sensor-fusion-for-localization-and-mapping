@@ -6,3 +6,6 @@ workspace/assignments/06-imu-navigation/src/gnss_ins_sim/config/recorder_allan_v
 workspace/assignments/06-imu-navigation/src/gnss_ins_sim/config/recorder_deterministic_error_calib.yaml
 workspace/assignments/.DS_Store
 workspace/assignments/09-graph-optimization/doc/.DS_Store
+workspace/assignments/10-sliding-window/.DS_Store
+workspace/assignments/10-sliding-window/doc/.DS_Store
+workspace/assignments/10-sliding-window/doc/code_updated_imu_pre_integration/.DS_Store
