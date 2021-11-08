@@ -176,14 +176,12 @@ public:
     //
     // TODO: compute residual:
     //
-
     Eigen::Map<Eigen::Matrix<double, 15, 1>> residual(residuals);
     residual = e_ + J_ * dx; 
 
     //
     // TODO: compute jacobian:
     //
-
     if ( jacobians ) {
       if ( jacobians[0] ) {
         // implement computing:
