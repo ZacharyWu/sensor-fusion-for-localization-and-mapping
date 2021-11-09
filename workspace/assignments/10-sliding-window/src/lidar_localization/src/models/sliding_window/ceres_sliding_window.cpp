@@ -254,7 +254,17 @@ bool CeresSlidingWindow::Optimize() {
             ceres::LocalParameterization *local_parameterization = new sliding_window::ParamPRVAG();
 
             // TODO: add parameter block:
+            for ( int i = 1; i <= kWindowSize + 1; ++i) {
+                auto &target_key_frame = optimized_key_frames_.at(N - i);
 
+                ceres::LocalParameterization *local_parameterization = new sliding_window::ParamPRVAG();
+
+                problem.AddParameterBlock(target_key_frame.prvag, 15, local_parameterization);
+
+                if ( target_key_frame.fixed ) {
+                    problem.SetParameterBlockConstant(target_key_frame.prvag);
+                }
+            }
 
             
         }
@@ -317,8 +327,11 @@ bool CeresSlidingWindow::Optimize() {
                 );
 
                 // TODO: add map matching factor into sliding window
-
-
+                problem.AddResidualBlock(
+                    factor_map_matching_pose,
+                    NULL,
+                    key_frame.prvag
+                );
 
             }            
         }
@@ -334,9 +347,11 @@ bool CeresSlidingWindow::Optimize() {
                 );
 
                 // TODO: add relative pose factor into sliding window
-
-
-
+                problem.AddResidualBlock(
+                    factor_relative_pose,
+                    NULL,
+                    key_frame_i.prvag, key_frame_j.prvag
+                );
 
             }
         }
@@ -352,8 +367,11 @@ bool CeresSlidingWindow::Optimize() {
                 );
 
                 // TODO: add IMU factor into sliding window
-
-
+                problem.AddResidualBlock(
+                    factor_imu_pre_integration,
+                    NULL,
+                    key_frame_i.prvag, key_frame_j.prvag
+                );
 
             }
         }
