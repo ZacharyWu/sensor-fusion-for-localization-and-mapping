@@ -66,7 +66,7 @@ public:
     //
     Eigen::Map<Eigen::Matrix<double, 6, 1>> residual(residuals);
     residual.block(INDEX_P, 0, 3, 1) = ori_i.inverse() * (pos_j - pos_i) - pos_ij;
-    residual.block(INDEX_P, 0, 3, 1) = (ori_i.inverse() * ori_j * ori_ij.inverse()).log();
+    residual.block(INDEX_R, 0, 3, 1) = (ori_i.inverse() * ori_j * ori_ij.inverse()).log();
 
     //
     // TODO: compute jacobians:
