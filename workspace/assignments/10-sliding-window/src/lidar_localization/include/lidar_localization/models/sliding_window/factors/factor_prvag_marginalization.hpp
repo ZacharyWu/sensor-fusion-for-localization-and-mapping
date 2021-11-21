@@ -87,9 +87,9 @@ public:
     // TODO: Update b:
     //
     // a. b_m:
-    b_.block<15, 1>(INDEX_M, 0) += J_m.transpose() * residuals;
+    b_.block<15, 1>(INDEX_M,        0) += J_m.transpose() * residuals;
     // a. b_r:
-    b_.block<15, 1>(INDEX_R, 0) += J_r.transpose() * residuals;
+    b_.block<15, 1>(INDEX_R,        0) += J_r.transpose() * residuals;
 
   }
 
@@ -123,9 +123,9 @@ public:
     // TODO: Update b:
     //
     // a. b_m:
-    b_.block<15, 1>(INDEX_M, 0) += J_m.transpose() * residuals;
+    b_.block<15, 1>(INDEX_M,        0) += J_m.transpose() * residuals;
     // a. b_r:
-    b_.block<15, 1>(INDEX_R, 0) += J_r.transpose() * residuals;
+    b_.block<15, 1>(INDEX_R,        0) += J_r.transpose() * residuals;
   }
 
   void Marginalize(
@@ -145,6 +145,7 @@ public:
     const Eigen::VectorXd &b_m = b_.block<15, 1>(INDEX_M, 0);
     const Eigen::VectorXd &b_r = b_.block<15, 1>(INDEX_R, 0);
 
+    // Schur Compliment
     Eigen::VectorXd H_mm_inv = H_mm.inverse();
     Eigen::VectorXd H_marginalized = H_rr - H_rm * H_mm_inv * H_mr;
     Eigen::VectorXd b_marginalized = b_r - H_rm * H_mm_inv * b_m;

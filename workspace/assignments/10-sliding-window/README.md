@@ -138,7 +138,6 @@ fill up evaluation:
 
 <img src="doc/Q1/lio_localization_rviz_running_done.png" alt="lio_localization_rviz_running_done" width="100%">
 
-**备注****备注****备注**
 
 
 ### 良好要求: 实现功能的基础上，性能在部分路段比EKF有改善。

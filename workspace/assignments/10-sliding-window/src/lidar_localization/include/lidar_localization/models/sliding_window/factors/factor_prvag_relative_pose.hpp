@@ -50,9 +50,9 @@ public:
     //
     // parse measurement:
     // 
-		const Eigen::Vector3d     &pos_ij = m_.block<3, 1>(INDEX_P, 0);
-		const Eigen::Vector3d &log_ori_ij = m_.block<3, 1>(INDEX_R, 0);
-    const Sophus::SO3d         ori_ij = Sophus::SO3d::exp(log_ori_ij);
+              const Eigen::Vector3d     &pos_ij = m_.block<3, 1>(INDEX_P, 0);
+              const Eigen::Vector3d &log_ori_ij = m_.block<3, 1>(INDEX_R, 0);
+              const Sophus::SO3d         ori_ij = Sophus::SO3d::exp(log_ori_ij);
 
     //
     // TODO: get square root of information matrix:
@@ -81,8 +81,10 @@ public:
         Eigen::Map<Eigen::Matrix<double, 6, 15, Eigen::RowMajor>> jacobian_i( jacobians[0] );
         jacobian_i.setZero();
 
-        jacobian_i.block<3, 3>(INDEX_P, INDEX_P) = -R_i_inv;
-        jacobian_i.block<3, 3>(INDEX_R, INDEX_R) = -J_r_inv*(ori_ij*ori_j.inverse()*ori_i).matrix();
+        jacobian_i.block<3, 3>(INDEX_P, INDEX_P) = -R_i_inv;                                          // (0,0)
+        jacobian_i.block<3, 3>(INDEX_R, INDEX_R) = -J_r_inv*(ori_ij*ori_j.inverse()*ori_i).matrix();  // (3,3)
+
+        jacobian_i.block<3, 3>(0,3) = R_i_inv * Sophus::SO3d::hat(pos_j - pos_i);                     // (0,3)
 
         jacobian_i = sqrt_info * jacobian_i;
       }
