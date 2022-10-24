@@ -68,7 +68,7 @@ int main(
     // get TF: 
     //
     std::shared_ptr<TFListener> lidar_to_imu_tf_sub_ptr = std::make_shared<TFListener>(nh, "/imu_link", "/velo_link");
-    std::shared_ptr<TFBroadCaster> lidar_to_map_tf_pub_ptr = std::make_shared<TFBroadCaster>("/map", "/velo_link");
+    std::shared_ptr<TFBroadCaster> lidar_to_map_tf_pub_ptr = std::make_shared<TFBroadCaster>("map", "/velo_link");
 
     //
     // subscribe to topics:
@@ -80,8 +80,8 @@ int main(
     //
     // register publishers:
     //
-    std::shared_ptr<CloudPublisher> cloud_pub_ptr = std::make_shared<CloudPublisher>(nh, "current_scan", 100, "/map");
-    std::shared_ptr<OdometryPublisher> odom_pub_ptr = std::make_shared<OdometryPublisher>(nh, "lidar_odom", "/map", "velo_link", 100);
+    std::shared_ptr<CloudPublisher> cloud_pub_ptr = std::make_shared<CloudPublisher>(nh, "current_scan", 100, "map");
+    std::shared_ptr<OdometryPublisher> odom_pub_ptr = std::make_shared<OdometryPublisher>(nh, "lidar_odom", "map", "velo_link", 100);
 
     std::deque<CloudData> cloud_data_buff;
     std::deque<IMUData> imu_data_buff;
